@@ -819,17 +819,22 @@ img {
 
 .social-links a {
   color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  padding: 0.5rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--glass-border);
-  border-radius: 8px;
+  border-radius: 10px;
+  background: rgba(15, 16, 25, 0.6);
+  transition: var(--transition-smooth);
 }
 
 .social-links a:hover {
   color: var(--cyber-cyan);
   border-color: var(--cyber-cyan);
   box-shadow: var(--cyan-glow);
+  transform: translateY(-2px);
 }
 
 /* Animations */
