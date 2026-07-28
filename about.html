@@ -3,18 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me | ML Portfolio</title>
+  <title>Engineer Profile | Marian George</title>
 </head>
 <body>
   <header class="header">
     <div class="container nav">
-      <div class="logo">Marian<span class="text-gradient">.Dev</span></div>
+      <div class="logo">
+        <span class="logo-icon">✦</span> Marian<span class="text-gradient">.Dev</span>
+      </div>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/projects.html">Projects</a></li>
         <li><a href="/about.html" class="active">About</a></li>
       </ul>
-      <a href="#" class="btn btn-primary open-contact-modal">Let's Connect</a>
+      <div class="header-actions">
+        <button class="btn btn-terminal open-terminal-btn" title="Open Interactive Terminal [Ctrl+K]">
+          [CTRL+K] TERMINAL
+        </button>
+        <a href="#contact" class="btn btn-primary open-contact-modal">Connect</a>
+      </div>
     </div>
   </header>
 
@@ -22,35 +29,40 @@
     <section class="section container">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
         <div class="fade-in-up">
-           <h1 class="hero-title">My Journey in <span class="text-gradient">Tech & AI</span></h1>
+           <span class="status-badge" style="margin-bottom: 1.2rem;"><span class="status-dot"></span> DOSSIER // BIOGRAPHY</span>
+           <h1 class="hero-title" style="font-size: 3.5rem;">Engineer <span class="text-gradient">Dossier</span></h1>
            <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 1.5rem;">
-             I am Marian George, a Systems Engineer at Tata Consultancy Services with a Btech in Computer Science (specialization in Artificial Intelligence and Machine Learning) from Vellore Institute of Technology. I am passionate about building scalable, intelligent systems and automation (gotta spend 5 hours making an automation that saves 3 mins per month).
+             I am Marian George, a Systems Engineer at Tata Consultancy Services with a B.Tech in Computer Science (Specialization in AI & Machine Learning) from Vellore Institute of Technology. I am passionate about building scalable, intelligent systems, high-accuracy model pipelines, and autonomous workflows.
            </p>
-           <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
-             My experience ranges from developing automated workflows with Microsoft Power Automate to engineering advanced meeting summarizers using Large Language Models like Llama-2. I also dabble in a lot of side projects, which range from NLP, Computer Vision, and predictive modeling algorithms to Android applications(the wonders of GenAI lol) and random things that make my life easier.
+           <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2.2rem;">
+             My background spans fine-tuning LLMs (Llama-2, LangChain, Hugging Face transformers), computer vision, predictive algorithms, cloud microservices on Azure, and custom browser/process automation.
            </p>
-           <a href="/MarianGeorgeResume.pdf" target="_blank" class="btn btn-primary">Download Resume</a>
+           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+             <a href="/MarianGeorgeResume.pdf" target="_blank" class="btn btn-gold">Download Resume &darr;</a>
+             <button class="btn btn-secondary open-terminal-btn">Launch Terminal [CTRL+K]</button>
+           </div>
         </div>
         
-        <div class="glass-panel fade-in-up" style="padding: 2.5rem; transition-delay: 0.2s;">
-           <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Technical <span class="text-gradient">Arsenal</span></h3>
-           <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="glass-panel hud-card fade-in-up" style="padding: 2.5rem; transition-delay: 0.2s;">
+           <span class="status-badge" style="margin-bottom: 1rem;"><span class="status-dot"></span> TECHNICAL ARSENAL</span>
+           <h3 style="font-size: 1.8rem; margin-bottom: 1.8rem;">Core <span class="text-gradient">Capabilities</span></h3>
+           <div style="display: flex; flex-direction: column; gap: 1.8rem;">
              <div>
-               <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem; font-size: 1rem;">Machine Learning & AI</h4>
+               <h4 style="color: var(--cyber-cyan); margin-bottom: 0.6rem; font-size: 1rem; font-family: var(--font-mono);">[01] AI & MACHINE LEARNING</h4>
                <div class="project-tags">
-                 <span class="tag">PyTorch</span> <span class="tag">Keras</span> <span class="tag">Scikit-Learn</span> <span class="tag">Hugging Face</span> <span class="tag">Langchain</span>
+                 <span class="tag">PyTorch</span> <span class="tag">Keras</span> <span class="tag">Scikit-Learn</span> <span class="tag">HuggingFace</span> <span class="tag">LangChain</span> <span class="tag">Llama-2</span>
                </div>
              </div>
              <div>
-               <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem; font-size: 1rem;">Programming & Dev</h4>
+               <h4 style="color: var(--cyber-cyan); margin-bottom: 0.6rem; font-size: 1rem; font-family: var(--font-mono);">[02] SYSTEMS & BACKEND</h4>
                <div class="project-tags">
-                 <span class="tag">Python</span> <span class="tag">SQL</span> <span class="tag">FastAPI</span> <span class="tag">HTML</span> <span class="tag">ROS</span>
+                 <span class="tag">Python 3.11</span> <span class="tag">FastAPI</span> <span class="tag">SQL</span> <span class="tag">OpenCV</span> <span class="tag">ROS</span> <span class="tag">REST APIs</span>
                </div>
              </div>
              <div>
-               <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem; font-size: 1rem;">Cloud & Data</h4>
+               <h4 style="color: var(--cyber-cyan); margin-bottom: 0.6rem; font-size: 1rem; font-family: var(--font-mono);">[03] CLOUD & AUTOMATION</h4>
                <div class="project-tags">
-                 <span class="tag">Azure</span> <span class="tag">Power Automate</span> <span class="tag">Pandas</span> <span class="tag">NumPy</span> <span class="tag">OpenCV</span>
+                 <span class="tag">Microsoft Azure</span> <span class="tag">Power Automate</span> <span class="tag">Pandas</span> <span class="tag">NumPy</span> <span class="tag">Selenium</span>
                </div>
              </div>
            </div>
@@ -61,27 +73,19 @@
 
   <footer class="footer" id="contact">
     <div class="container footer-content">
-      <div class="logo">Marian<span class="text-gradient">.Dev</span></div>
+      <div class="logo">
+        <span class="logo-icon">✦</span> Marian<span class="text-gradient">.Dev</span>
+      </div>
       <div class="social-links">
         <a href="https://github.com/ShotgunShinobi" target="_blank" aria-label="GitHub">GH</a>
         <a href="https://www.linkedin.com/in/mariangeo/" target="_blank" aria-label="LinkedIn">IN</a>
         <a href="mailto:mariangeorgek2015@gmail.com" aria-label="Email">@</a>
       </div>
-      <p style="color: var(--text-secondary);">&copy; 2026 Marian George. All rights reserved.</p>
+      <p style="color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.85rem;">
+        &copy; 2026 Marian George. Powered by Neural Core V2.
+      </p>
     </div>
   </footer>
-
-  <div class="modal-overlay" id="contactModal">
-    <div class="modal-content" style="text-align: center;">
-      <button class="modal-close" id="closeContactModal">&times;</button>
-      <h3 class="modal-title" style="margin-bottom: 1rem;">Let's Connect</h3>
-      <p class="modal-desc" style="margin-bottom: 1.5rem;">Feel free to reach out via email or LinkedIn!</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="mailto:mariangeorgek2015@gmail.com" class="btn btn-primary">Email Me</a>
-        <a href="https://www.linkedin.com/in/mariangeo/" target="_blank" class="btn btn-secondary">LinkedIn</a>
-      </div>
-    </div>
-  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>

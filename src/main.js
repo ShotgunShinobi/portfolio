@@ -1,19 +1,114 @@
 import './style.css';
 import { inject } from '@vercel/analytics';
+import { initCanvasBackground } from './canvas-bg.js';
+import { openDrawer } from './drawer.js';
 
-// Initialize Vercel Web Analytics
+// Initialize Vercel Analytics
 inject();
 
-const header = document.querySelector('.header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
+document.addEventListener('DOMContentLoaded', () => {
+  initCanvasBackground();
+  initAnimations();
+  initSpotlightEffect();
+  initScrollSpy();
+});
+
+// Toast notification trigger
+function showToast(message) {
+  let toast = document.getElementById('toastNotification');
+  if (!toast) {
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="toast-notification" id="toastNotification">
+        <span id="toastMsg">${message}</span>
+      </div>
+    `);
+    toast = document.getElementById('toastNotification');
   } else {
-    header.classList.remove('scrolled');
+    document.getElementById('toastMsg').textContent = message;
+  }
+
+  toast.classList.add('active');
+  setTimeout(() => {
+    toast.classList.remove('active');
+  }, 2500);
+}
+
+// 1-Click Copy Email logic
+document.addEventListener('click', (e) => {
+  const copyBtn = e.target.closest('.copy-email-btn');
+  if (copyBtn) {
+    e.preventDefault();
+    const email = 'mariangeorgek2015@gmail.com';
+    navigator.clipboard.writeText(email).then(() => {
+      showToast('✓ Email copied to clipboard: mariangeorgek2015@gmail.com');
+    }).catch(() => {
+      showToast('Email: mariangeorgek2015@gmail.com');
+    });
   }
 });
 
-// Intersection Observer for scroll animations
+// 1-Click Slide-Over Drawer logic on project card click
+document.addEventListener('click', (e) => {
+  const card = e.target.closest('.project-card');
+  if (card) {
+    const projectId = card.getAttribute('data-id');
+    if (projectId) {
+      openDrawer(projectId);
+    }
+  }
+});
+
+// Filter Pill logic
+document.addEventListener('click', (e) => {
+  const filterBtn = e.target.closest('.filter-btn');
+  if (filterBtn) {
+    const filterValue = filterBtn.getAttribute('data-filter');
+    const projects = document.querySelectorAll('.project-card');
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-secondary');
+    });
+    filterBtn.classList.remove('btn-secondary');
+    filterBtn.classList.add('btn-primary');
+
+    projects.forEach(project => {
+      const categoryAttr = project.getAttribute('data-category') || '';
+      const categories = categoryAttr.split(',').map(c => c.trim().toLowerCase());
+
+      if (filterValue === 'all' || categories.includes(filterValue.toLowerCase())) {
+        project.style.display = 'flex';
+      } else {
+        project.style.display = 'none';
+      }
+    });
+  }
+});
+
+// Scrollspy for Floating Dock
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 150;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
+
+// Intersection Observer for Animations
 const observerOptions = {
   root: null,
   rootMargin: '0px',
@@ -35,157 +130,14 @@ function initAnimations() {
   });
 }
 
-// Initial load
-initAnimations();
-
-// View Transitions Router
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('a');
-  if (!link) return;
-  
-  const href = link.getAttribute('href');
-  // Only intercept internal links
-  if (href && href.startsWith('/') && !href.startsWith('#') && link.target !== '_blank') {
-    e.preventDefault();
-    navigateTo(href);
-  }
-});
-
-window.addEventListener('popstate', () => {
-  navigateTo(window.location.pathname, false);
-});
-
-async function navigateTo(url, pushState = true) {
-  const response = await fetch(url);
-  const text = await response.text();
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(text, 'text/html');
-  
-  const newMain = doc.querySelector('main').innerHTML;
-  const newTitle = doc.querySelector('title').innerText;
-  
-  if (!document.startViewTransition) {
-    updateDOM(newMain, newTitle, url, pushState);
-    return;
-  }
-  
-  document.startViewTransition(() => {
-    updateDOM(newMain, newTitle, url, pushState);
+function initSpotlightEffect() {
+  document.querySelectorAll('.hud-card, .project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
   });
 }
-
-function updateDOM(newMain, newTitle, url, pushState) {
-  document.querySelector('main').innerHTML = newMain;
-  document.title = newTitle;
-  
-  if (pushState) {
-    window.history.pushState({}, '', url);
-  }
-  
-  window.scrollTo(0, 0);
-  initAnimations();
-  
-  // Update active class in header
-  const currentPath = window.location.pathname;
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.classList.remove('active');
-    const href = link.getAttribute('href');
-    if (href === currentPath || (currentPath === '/' && href === '/index.html')) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// Modal Logic
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.open-modal-btn');
-  if (btn) {
-    e.preventDefault();
-    const title = btn.getAttribute('data-title');
-    const desc = btn.getAttribute('data-desc');
-    const github = btn.getAttribute('data-github');
-    
-    const titleEl = document.getElementById('modalTitle');
-    const descEl = document.getElementById('modalDesc');
-    const linkEl = document.getElementById('modalGithubLink');
-    
-    if (titleEl) titleEl.textContent = title;
-    if (descEl) descEl.textContent = desc;
-    if (linkEl) {
-      if (github && github !== '#') {
-        linkEl.href = github;
-        linkEl.style.display = '';
-      } else {
-        linkEl.style.display = 'none';
-      }
-    }
-    
-    const modal = document.getElementById('projectModal');
-    if (modal) modal.classList.add('active');
-  }
-
-  const contactBtn = e.target.closest('a[href="#contact"]') || e.target.closest('.open-contact-modal');
-  if (contactBtn) {
-    e.preventDefault();
-    let modal = document.getElementById('contactModal');
-    if (!modal) {
-      // Inject modal into DOM dynamically so it works across all pages
-      document.body.insertAdjacentHTML('beforeend', `
-        <div class="modal-overlay" id="contactModal">
-          <div class="modal-content" style="text-align: center;">
-            <button class="modal-close" id="closeContactModal">&times;</button>
-            <h3 class="modal-title" style="margin-bottom: 1rem;">Let's Connect</h3>
-            <p class="modal-desc" style="margin-bottom: 1.5rem;">Feel free to reach out via email or LinkedIn!</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-              <a href="mailto:mariangeorgek2015@gmail.com" class="btn btn-primary">Email Me</a>
-              <a href="https://www.linkedin.com/in/mariangeo/" target="_blank" class="btn btn-secondary">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-      `);
-      modal = document.getElementById('contactModal');
-    }
-    modal.classList.add('active');
-  }
-
-  if (e.target.closest('#closeModal') || (e.target.classList.contains('modal-overlay') && e.target.id === 'projectModal')) {
-    const modal = document.getElementById('projectModal');
-    if (modal) modal.classList.remove('active');
-  }
-
-  if (e.target.closest('#closeContactModal') || (e.target.classList.contains('modal-overlay') && e.target.id === 'contactModal')) {
-    const modal = document.getElementById('contactModal');
-    if (modal) modal.classList.remove('active');
-  }
-});
-
-// Filter Logic
-document.addEventListener('click', (e) => {
-  const filterBtn = e.target.closest('.filter-btn');
-  if (filterBtn) {
-    const filterValue = filterBtn.getAttribute('data-filter');
-    const projects = document.querySelectorAll('.project-card');
-    
-    // Update active state of buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.classList.remove('btn-primary');
-      btn.classList.add('btn-secondary');
-    });
-    filterBtn.classList.remove('btn-secondary');
-    filterBtn.classList.add('btn-primary');
-
-    projects.forEach(project => {
-      if (filterValue === 'all') {
-        project.style.display = '';
-      } else {
-        const categoryAttr = project.getAttribute('data-category') || '';
-        const categories = categoryAttr.split(',').map(c => c.trim());
-        if (categories.includes(filterValue)) {
-          project.style.display = '';
-        } else {
-          project.style.display = 'none';
-        }
-      }
-    });
-  }
-});

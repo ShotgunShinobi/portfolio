@@ -3,66 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Stock Analysis Tool | Marian George</title>
+  <title>AI Stock Market Analytics Engine | Telemetry</title>
 </head>
 <body>
   <header class="header">
     <div class="container nav">
-      <div class="logo">Marian<span class="text-gradient">.Dev</span></div>
+      <div class="logo">
+        <span class="logo-icon">✦</span> Marian<span class="text-gradient">.Dev</span>
+      </div>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/projects.html">Projects</a></li>
         <li><a href="/about.html">About</a></li>
       </ul>
-      <a href="#contact" class="btn btn-primary">Let's Connect</a>
+      <div class="header-actions">
+        <button class="btn btn-terminal open-terminal-btn" title="Open Interactive Terminal [Ctrl+K]">
+          [CTRL+K] TERMINAL
+        </button>
+        <a href="#contact" class="btn btn-primary">Connect</a>
+      </div>
     </div>
   </header>
 
-  <main id="swup" class="transition-fade" style="padding-top: 150px; min-height: 80vh;">
+  <main id="swup" class="transition-fade" style="padding-top: 130px; min-height: 80vh;">
     <article class="container fade-in-up">
-      <a href="/projects.html" class="btn btn-secondary" style="margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">&larr; Back to Projects</a>
+      <a href="/projects.html" class="btn btn-secondary" style="margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono);">&larr; BACK TO REPOSITORY INDEX</a>
       
-      <h1 class="hero-title" style="font-size: 3.5rem; margin-bottom: 1rem;">AI Stock <span class="text-gradient">Analysis Tool</span></h1>
+      <div style="margin-bottom: 1.5rem;">
+        <span class="status-badge"><span class="status-dot"></span> TELEMETRY DOSSIER // FINTECH PREDICTIVE MODELING</span>
+      </div>
+      
+      <h1 class="hero-title" style="font-size: 3.5rem; margin-bottom: 1rem;">AI Stock Market <span class="text-gradient">Analytics Engine</span></h1>
       <div class="project-tags" style="margin-bottom: 3rem;">
+        <span class="tag">FinTech</span>
         <span class="tag">Python</span>
         <span class="tag">Yahoo Finance</span>
         <span class="tag">Selenium</span>
-        <span class="tag">Predictive Modeling</span>
+        <span class="tag">Predictive ML</span>
       </div>
 
-      <img src="/project_dataviz_1777611351904.png" alt="Data Visualization Dashboard" style="width: 100%; height: 500px; object-fit: cover; border-radius: 16px; margin-bottom: 4rem; border: 1px solid var(--glass-border);" />
+      <img src="/project_dataviz_1777611351904.png" alt="Data Visualization Dashboard" style="width: 100%; height: 480px; object-fit: cover; border-radius: 12px; margin-bottom: 4rem; border: 1px solid var(--glass-border); box-shadow: var(--glass-glow);" />
 
       <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem;">
         <div>
-          <h2 style="font-size: 2rem; margin-bottom: 1rem;">Executive Summary</h2>
+          <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--cyber-cyan);">Executive Summary</h2>
           <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2.5rem;">
-            An AI-driven tool for real-time stock market analysis, engineered to enhance forecasting accuracy and deliver actionable quantitative insights for trading strategies.
+            An AI-driven real-time financial market telemetry and analytics engine. Engineered to improve price trend forecasting accuracy and deliver continuous quantitative signals.
           </p>
 
-          <h2 style="font-size: 2rem; margin-bottom: 1rem;">The Problem</h2>
+          <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--cyber-cyan);">The Problem</h2>
           <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2.5rem;">
-            Retail investors and boutique trading firms often lack access to sophisticated, real-time predictive analytics tools that can synthesize historical price data to forecast short-term price movements accurately.
+            Automated trading systems require high-fidelity data aggregation pipelines that synthesize high-frequency price movements and sentiment indicators in real time without lag.
           </p>
 
-          <h2 style="font-size: 2rem; margin-bottom: 1rem;">Data & Methodology</h2>
+          <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--cyber-cyan);">Data & Pipeline Architecture</h2>
           <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2.5rem;">
-            Developed a robust pipeline utilizing Python, integrating the Yahoo Finance API for comprehensive market data ingestion. Leveraged Selenium to automate web interactions and gather supplementary financial indicators, feeding into an AI model designed for time-series forecasting.
+            Built an automated data ingestion network using Python, Yahoo Finance API, and Selenium headless crawlers for real-time web telemetry. Features dynamic data cleaning, time-series feature engineering, and predictive ML models.
           </p>
 
-          <h2 style="font-size: 2rem; margin-bottom: 1rem;">Results</h2>
-          <ul style="color: var(--text-secondary); font-size: 1.1rem; padding-left: 1.5rem; margin-bottom: 2.5rem; line-height: 2;">
-            <li>Significantly enhanced forecasting accuracy for real-time stock market analysis.</li>
-            <li>Delivers continuous, actionable insights for quantitative trading strategies.</li>
-            <li>Automated data collection and aggregation pipelines, reducing manual research time.</li>
+          <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--imperial-gold);">Verified Metrics & Results</h2>
+          <ul style="color: var(--text-secondary); font-size: 1.1rem; padding-left: 1.5rem; margin-bottom: 2.5rem; line-height: 2; font-family: var(--font-mono);">
+            <li><span style="color: var(--cyber-cyan);">[METRIC 01]</span> Enhanced short-term directional prediction accuracy.</li>
+            <li><span style="color: var(--cyber-cyan);">[METRIC 02]</span> Continuous automated data pipeline execution.</li>
+            <li><span style="color: var(--cyber-cyan);">[METRIC 03]</span> Automated web telemetry reducing research lead time.</li>
           </ul>
         </div>
 
         <div>
-          <div class="glass-panel" style="padding: 2rem; position: sticky; top: 100px;">
-            <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Project Links</h3>
+          <div class="glass-panel hud-card" style="padding: 2rem; position: sticky; top: 120px;">
+            <span class="status-badge" style="margin-bottom: 1rem;"><span class="status-dot"></span> REPOSITORY LINKS</span>
+            <h3 style="margin-bottom: 1.5rem; font-size: 1.3rem;">Artifact Telemetry</h3>
             <div style="display: flex; flex-direction: column; gap: 1rem;">
-              <a href="https://github.com/ShotgunShinobi/StockAI" target="_blank" class="btn btn-primary" style="width: 100%;">View Source on GitHub</a>
-              <a href="#" class="btn btn-secondary" style="width: 100%;">View Live Dashboard</a>
+              <a href="https://github.com/ShotgunShinobi/StockAI" target="_blank" class="btn btn-gold" style="width: 100%;">GitHub Repository &rarr;</a>
+              <button class="btn btn-secondary open-terminal-btn" style="width: 100%;">Run Terminal Test</button>
             </div>
           </div>
         </div>
@@ -72,13 +85,17 @@
 
   <footer class="footer" id="contact">
     <div class="container footer-content">
-      <div class="logo">Marian<span class="text-gradient">.Dev</span></div>
+      <div class="logo">
+        <span class="logo-icon">✦</span> Marian<span class="text-gradient">.Dev</span>
+      </div>
       <div class="social-links">
         <a href="https://github.com/ShotgunShinobi" target="_blank" aria-label="GitHub">GH</a>
         <a href="https://www.linkedin.com/in/mariangeo/" target="_blank" aria-label="LinkedIn">IN</a>
         <a href="mailto:mariangeorgek2015@gmail.com" aria-label="Email">@</a>
       </div>
-      <p style="color: var(--text-secondary);">&copy; 2026 Marian George. All rights reserved.</p>
+      <p style="color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.85rem;">
+        &copy; 2026 Marian George. Powered by Neural Core V2.
+      </p>
     </div>
   </footer>
 
