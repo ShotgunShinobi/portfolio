@@ -104,12 +104,7 @@ const PRECACHED_REPOS = [
 // Add or remove repository names here to control exactly which repos are visible on your portfolio.
 // Set to null or [] if you want to display all public repos without filtering.
 const FEATURED_REPOS = [
-  'ExifRemover',
-  'Ethereum-Hunter',
-  'GeoMemoir',
   'SimilarSiteExtenstion',
-  'StockAI',
-  'AI-Text-Summarizer'
 ];
 
 
@@ -241,10 +236,6 @@ async function initGitHubReposSync() {
 
             <h3 class="project-title" style="font-size: 1.45rem;">${repo.name}</h3>
             <p class="project-desc">${repo.description || 'Public GitHub repository by @ShotgunShinobi.'}</p>
-
-            <div class="gh-meta-bar">
-              <span>Updated: ${updatedDate}</span>
-            </div>
 
             <div class="project-action-bar" style="margin-top: 1.2rem;">
               <span>${drawerId ? 'View Telemetry Dossier &rarr;' : 'View Source on GitHub &rarr;'}</span>
