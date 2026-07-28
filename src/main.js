@@ -101,11 +101,8 @@ const PRECACHED_REPOS = [
 ];
 
 // Whitelist of GitHub repository names to display on your website.
-// Add or remove repository names here to control exactly which repos are visible on your portfolio.
-// Set to null or [] if you want to display all public repos without filtering.
-//const FEATURED_REPOS = [
-//  'SimilarSiteExtenstion',
-//];
+// Add repository names here to filter, or set to null / [] to display all public repos.
+const FEATURED_REPOS = null;
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -181,6 +178,23 @@ function getDrawerIdForRepo(repoName) {
   return null;
 }
 
+function applyActiveFilter() {
+  const activeBtn = document.querySelector('.filter-btn.btn-primary');
+  const filterVal = activeBtn ? activeBtn.getAttribute('data-filter').toLowerCase() : 'featured';
+  const projects = document.querySelectorAll('.project-card');
+
+  projects.forEach(project => {
+    const categoryAttr = (project.getAttribute('data-category') || '').toLowerCase();
+    const categories = categoryAttr.split(',').map(c => c.trim());
+
+    if (filterVal === 'all' || categories.includes(filterVal)) {
+      project.style.display = 'flex';
+    } else {
+      project.style.display = 'none';
+    }
+  });
+}
+
 // Fetch & Render GitHub Repositories
 async function initGitHubReposSync() {
   const container = document.getElementById('live-github-container');
@@ -209,7 +223,7 @@ async function initGitHubReposSync() {
     }
 
     if (countBadge) {
-      countBadge.textContent = `Indexing ${repos.length} Featured Repositories`;
+      countBadge.textContent = `Indexing ${repos.length} Repositories`;
     }
 
     container.innerHTML = repos.map((repo, idx) => {
@@ -247,6 +261,7 @@ async function initGitHubReposSync() {
     }).join('');
 
     initSpotlightEffect();
+    applyActiveFilter();
   }
 
   fetchAndRender();
@@ -258,7 +273,7 @@ async function initGitHubReposSync() {
       await fetchAndRender();
       syncBtn.textContent = 'Sync GitHub Repos 🔄';
       syncBtn.disabled = false;
-      showToast('✓ Successfully synced featured repositories from GitHub @ShotgunShinobi');
+      showToast('✓ Successfully synced public repositories from GitHub @ShotgunShinobi');
     });
   }
 }
@@ -296,9 +311,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
   const filterBtn = e.target.closest('.filter-btn');
   if (filterBtn) {
-    const filterValue = filterBtn.getAttribute('data-filter').toLowerCase();
-    const projects = document.querySelectorAll('.project-card');
-
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.classList.remove('btn-primary');
       btn.classList.add('btn-secondary');
@@ -306,16 +318,7 @@ document.addEventListener('click', (e) => {
     filterBtn.classList.remove('btn-secondary');
     filterBtn.classList.add('btn-primary');
 
-    projects.forEach(project => {
-      const categoryAttr = (project.getAttribute('data-category') || '').toLowerCase();
-      const categories = categoryAttr.split(',').map(c => c.trim());
-
-      if (filterValue === 'all' || categories.includes(filterValue)) {
-        project.style.display = 'flex';
-      } else {
-        project.style.display = 'none';
-      }
-    });
+    applyActiveFilter();
   }
 });
 

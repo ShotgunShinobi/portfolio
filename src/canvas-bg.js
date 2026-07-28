@@ -41,10 +41,10 @@ export function initCanvasBackground() {
   let particles = [];
 
   const colors = [
-    'rgba(157, 78, 221, ',   // Amethyst Purple
-    'rgba(112, 0, 255, ',    // Royal Violet
-    'rgba(0, 245, 212, ',    // Cyber Cyan
-    'rgba(255, 183, 3, '     // Imperial Gold
+    'rgba(99, 102, 241, ',   // Electric Indigo
+    'rgba(56, 189, 248, ',   // Sky Cyan
+    'rgba(129, 140, 248, ',  // Soft Blue
+    'rgba(212, 178, 111, '   // Muted Champagne Gold
   ];
 
   class Particle {
@@ -148,14 +148,14 @@ export function initCanvasBackground() {
 
       // Ambient radial dark royal glows
       const grad1 = ctx.createRadialGradient(width * 0.2, height * 0.3, 50, width * 0.2, height * 0.3, 500);
-      grad1.addColorStop(0, 'rgba(112, 0, 255, 0.12)');
-      grad1.addColorStop(1, 'rgba(10, 5, 24, 0)');
+      grad1.addColorStop(0, 'rgba(99, 102, 241, 0.08)');
+      grad1.addColorStop(1, 'rgba(9, 10, 15, 0)');
       ctx.fillStyle = grad1;
       ctx.fillRect(0, 0, width, height);
 
       const grad2 = ctx.createRadialGradient(width * 0.8, height * 0.7, 50, width * 0.8, height * 0.7, 600);
-      grad2.addColorStop(0, 'rgba(157, 78, 221, 0.1)');
-      grad2.addColorStop(1, 'rgba(10, 5, 24, 0)');
+      grad2.addColorStop(0, 'rgba(56, 189, 248, 0.06)');
+      grad2.addColorStop(1, 'rgba(9, 10, 15, 0)');
       ctx.fillStyle = grad2;
       ctx.fillRect(0, 0, width, height);
 
@@ -174,8 +174,8 @@ export function initCanvasBackground() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            const lineAlpha = (1 - dist / 130) * 0.25;
-            ctx.strokeStyle = `rgba(157, 78, 221, ${lineAlpha})`;
+            const lineAlpha = (1 - dist / 130) * 0.22;
+            ctx.strokeStyle = `rgba(99, 102, 241, ${lineAlpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
