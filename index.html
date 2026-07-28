@@ -98,23 +98,44 @@
     <!-- Section 2: Artifacts / Projects Grid -->
     <section class="section container" id="artifacts">
       <div style="text-align: center; margin-bottom: 2rem;" class="fade-in-up">
-        <span class="status-badge" style="margin-bottom: 1rem;"><span class="status-dot"></span> REPOSITORY INDEX</span>
-        <h2 class="section-title" style="margin-bottom: 1rem;">Project <span class="text-gradient">Artifacts</span></h2>
-        <p style="color: var(--text-secondary); font-size: 1.05rem;">Click any artifact card below for an instant case study deep-dive.</p>
+        <span class="status-badge" style="margin-bottom: 1rem;"><span class="status-dot"></span> REPOSITORY INDEX // LIVE GITHUB SYNC</span>
+        <h2 class="section-title" style="margin-bottom: 1rem;">Project <span class="text-gradient">Artifacts & Repos</span></h2>
+        <p style="color: var(--text-secondary); font-size: 1.05rem;">Directly synced with public repositories on <a href="https://github.com/ShotgunShinobi" target="_blank" style="color: var(--imperial-gold); text-decoration: underline;">GitHub @ShotgunShinobi</a>.</p>
+      </div>
+
+      <!-- Live Sync Telemetry & Stats Bar -->
+      <div class="glass-panel hud-card github-telemetry-bar fade-in-up" style="margin-bottom: 2rem; padding: 1.2rem 1.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span class="status-badge" style="border-color: rgba(34, 197, 94, 0.4); color: #4ade80;">
+            <span class="status-dot" style="background: #22c55e; box-shadow: 0 0 10px #22c55e;"></span> LIVE API CONNECTED
+          </span>
+          <span id="gh-repo-count" style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--text-secondary);">
+            Indexing 11 Public Repositories
+          </span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <button class="btn btn-secondary" id="sync-github-btn" style="padding: 0.45rem 1rem; font-size: 0.82rem; font-family: var(--font-mono);">
+            Sync GitHub Repos 🔄
+          </button>
+        </div>
       </div>
 
       <!-- Zero-Friction 1-Click Filter Chips -->
       <div class="filter-container fade-in-up">
-        <button class="btn btn-primary filter-btn" data-filter="all">ALL [4]</button>
+        <button class="btn btn-primary filter-btn" data-filter="all">ALL</button>
+        <button class="btn btn-secondary filter-btn" data-filter="live-github">LIVE GITHUB REPOS</button>
         <button class="btn btn-secondary filter-btn" data-filter="NLP">NLP & LLM</button>
         <button class="btn btn-secondary filter-btn" data-filter="Finance">FINTECH</button>
         <button class="btn btn-secondary filter-btn" data-filter="Web3">WEB3</button>
+        <button class="btn btn-secondary filter-btn" data-filter="Mobile">MOBILE & APP</button>
+        <button class="btn btn-secondary filter-btn" data-filter="Security">SECURITY & PRIVACY</button>
         <button class="btn btn-secondary filter-btn" data-filter="Automation">AUTOMATION</button>
       </div>
 
-      <div class="projects-grid">
+      <!-- Featured Projects Grid -->
+      <div class="projects-grid" id="main-projects-grid">
         <!-- Card 1: NLP -->
-        <div class="project-card glass-panel hud-card fade-in-up" data-id="nlp" data-category="nlp, machine learning" style="transition-delay: 0.1s;">
+        <div class="project-card glass-panel hud-card fade-in-up" data-id="nlp" data-category="nlp, machine learning, featured" style="transition-delay: 0.1s;">
           <div class="project-img-wrapper">
             <img src="/project_nlp_1777611335087.png" alt="Document Summarization Engine" class="project-img" />
           </div>
@@ -128,13 +149,73 @@
             <p class="project-desc">Applied NLP algorithms & Llama-2 to condense 10k-word documents, cutting processing time by 50% with 95% measured accuracy.</p>
             <div class="project-action-bar">
               <span>View Case Study &rarr;</span>
-              <span style="color: var(--imperial-gold);">[ 95% ACCURACY ]</span>
+              <span style="color: var(--imperial-gold);">[ AI-Text-Summarizer ]</span>
             </div>
           </div>
         </div>
 
-        <!-- Card 2: FinTech -->
-        <div class="project-card glass-panel hud-card fade-in-up" data-id="dataviz" data-category="finance, machine learning" style="transition-delay: 0.2s;">
+        <!-- Card 2: ExifRemover -->
+        <div class="project-card glass-panel hud-card fade-in-up" data-id="exifremover" data-category="security, python, featured" style="transition-delay: 0.15s;">
+          <div class="project-img-wrapper">
+            <img src="/project_exifremover.png" alt="ExifRemover Privacy Sanitizer" class="project-img" />
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag">Security</span>
+              <span class="tag">Python</span>
+              <span class="tag">Privacy</span>
+            </div>
+            <h3 class="project-title">ExifRemover Privacy Metadata Sanitizer</h3>
+            <p class="project-desc">High-speed Python utility stripping sensitive GPS location telemetry, camera serials, and device metadata from media files.</p>
+            <div class="project-action-bar">
+              <span>View Case Study &rarr;</span>
+              <span style="color: var(--imperial-gold);">[ ExifRemover ]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: GeoMemoir -->
+        <div class="project-card glass-panel hud-card fade-in-up" data-id="geomemoir" data-category="mobile, open source, featured" style="transition-delay: 0.2s;">
+          <div class="project-img-wrapper">
+            <img src="/project_geomemoir.png" alt="GeoMemoir App" class="project-img" />
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag">Kotlin</span>
+              <span class="tag">Android</span>
+              <span class="tag">OpenSource Maps</span>
+            </div>
+            <h3 class="project-title">GeoMemoir - Privacy-First Geo-Tagging App</h3>
+            <p class="project-desc">Native Kotlin Android app for tagging locations and logging memories using open-source maps with 100% local data privacy.</p>
+            <div class="project-action-bar">
+              <span>View Case Study &rarr;</span>
+              <span style="color: var(--imperial-gold);">[ GeoMemoir ]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: OpenClaude -->
+        <div class="project-card glass-panel hud-card fade-in-up" data-id="openclaude" data-category="nlp, automation, featured" style="transition-delay: 0.25s;">
+          <div class="project-img-wrapper">
+            <img src="/project_openclaude.png" alt="OpenClaude Multi-LLM Bridge" class="project-img" />
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag">LLM</span>
+              <span class="tag">AI Agent</span>
+              <span class="tag">200+ Models</span>
+            </div>
+            <h3 class="project-title">OpenClaude Multi-LLM Agent Bridge</h3>
+            <p class="project-desc">Open-source translation shim enabling Claude Code tools to interface seamlessly with OpenAI, Gemini, DeepSeek, and Ollama.</p>
+            <div class="project-action-bar">
+              <span>View Case Study &rarr;</span>
+              <span style="color: var(--imperial-gold);">[ openclaude ]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: FinTech -->
+        <div class="project-card glass-panel hud-card fade-in-up" data-id="dataviz" data-category="finance, machine learning, featured" style="transition-delay: 0.3s;">
           <div class="project-img-wrapper">
             <img src="/project_dataviz_1777611351904.png" alt="AI Stock Market Analytics" class="project-img" />
           </div>
@@ -148,13 +229,13 @@
             <p class="project-desc">Real-time financial market analytics and time-series predictive modeling engine with automated web telemetry.</p>
             <div class="project-action-bar">
               <span>View Case Study &rarr;</span>
-              <span style="color: var(--imperial-gold);">[ REAL-TIME ]</span>
+              <span style="color: var(--imperial-gold);">[ StockAI ]</span>
             </div>
           </div>
         </div>
 
-        <!-- Card 3: Web3 -->
-        <div class="project-card glass-panel hud-card fade-in-up" data-id="eth" data-category="web3" style="transition-delay: 0.3s;">
+        <!-- Card 6: Web3 -->
+        <div class="project-card glass-panel hud-card fade-in-up" data-id="eth" data-category="web3, featured" style="transition-delay: 0.35s;">
           <div class="project-img-wrapper">
             <img src="/eth_hunter_project.png" alt="Ethereum Hunter" class="project-img" />
           </div>
@@ -162,34 +243,19 @@
             <div class="project-tags">
               <span class="tag">Web3</span>
               <span class="tag">Blockchain</span>
+              <span class="tag">Express JS</span>
             </div>
             <h3 class="project-title">Ethereum Hunter Intelligence</h3>
             <p class="project-desc">Specialized blockchain intelligence tool built for analyzing Ethereum smart contract calls and ledger transfers in real time.</p>
             <div class="project-action-bar">
               <span>View Case Study &rarr;</span>
-              <span style="color: var(--imperial-gold);">[ WEB3 TELEMETRY ]</span>
+              <span style="color: var(--imperial-gold);">[ Ethereum-Hunter ]</span>
             </div>
           </div>
         </div>
 
-        <!-- Card 4: Automation -->
-        <div class="project-card glass-panel hud-card fade-in-up" data-id="yt" data-category="automation, cloud" style="transition-delay: 0.4s;">
-          <div class="project-img-wrapper">
-            <img src="/yt_summary_project.png" alt="YouTube Transcript Summarization" class="project-img" />
-          </div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">Automation</span>
-              <span class="tag">Azure AI</span>
-            </div>
-            <h3 class="project-title">YouTube Transcript Summarizer</h3>
-            <p class="project-desc">Cloud application leveraging Azure Speech Services for automated audio transcript extraction and key point synthesis.</p>
-            <div class="project-action-bar">
-              <span>View Case Study &rarr;</span>
-              <span style="color: var(--imperial-gold);">[ Azure AI ]</span>
-            </div>
-          </div>
-        </div>
+        <!-- Dynamic Live GitHub Repos Container (Populated via JS) -->
+        <div id="live-github-container" style="display: contents;"></div>
       </div>
     </section>
 
