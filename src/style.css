@@ -858,3 +858,37 @@ img {
     padding: 2rem 1.5rem;
   }
 }
+
+/* Live GitHub Repository Cards & Telemetry */
+.gh-repo-card {
+  border-left: 3px solid var(--royal-purple);
+}
+
+.gh-repo-card:hover {
+  border-left-color: var(--cyber-cyan);
+}
+
+.gh-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+}
+
+.gh-lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--imperial-gold);
+  box-shadow: 0 0 8px var(--imperial-gold);
+}
+
+.gh-updated-time {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
