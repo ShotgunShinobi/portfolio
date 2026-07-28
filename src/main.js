@@ -106,11 +106,8 @@ const PRECACHED_REPOS = [
 const FEATURED_REPOS = [
   'ExifRemover',
   'Ethereum-Hunter',
-  'odysseus',
   'GeoMemoir',
-  'openclaude',
   'SimilarSiteExtenstion',
-  'Auto_Jobs_Applier',
   'StockAI',
   'AI-Text-Summarizer'
 ];
