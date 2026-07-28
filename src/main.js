@@ -103,9 +103,9 @@ const PRECACHED_REPOS = [
 // Whitelist of GitHub repository names to display on your website.
 // Add or remove repository names here to control exactly which repos are visible on your portfolio.
 // Set to null or [] if you want to display all public repos without filtering.
-const FEATURED_REPOS = [
-  'SimilarSiteExtenstion',
-];
+//const FEATURED_REPOS = [
+//  'SimilarSiteExtenstion',
+//];
 
 
 document.addEventListener('DOMContentLoaded', () => {
