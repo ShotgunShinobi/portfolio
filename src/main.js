@@ -100,6 +100,22 @@ const PRECACHED_REPOS = [
   }
 ];
 
+// Whitelist of GitHub repository names to display on your website.
+// Add or remove repository names here to control exactly which repos are visible on your portfolio.
+// Set to null or [] if you want to display all public repos without filtering.
+const FEATURED_REPOS = [
+  'ExifRemover',
+  'Ethereum-Hunter',
+  'odysseus',
+  'GeoMemoir',
+  'openclaude',
+  'SimilarSiteExtenstion',
+  'Auto_Jobs_Applier',
+  'StockAI',
+  'AI-Text-Summarizer'
+];
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initCanvasBackground();
   initAnimations();
@@ -195,8 +211,13 @@ async function initGitHubReposSync() {
       console.log('GitHub API fetch using cached fallback');
     }
 
+    if (FEATURED_REPOS && FEATURED_REPOS.length > 0) {
+      const featuredSet = new Set(FEATURED_REPOS.map(name => name.toLowerCase()));
+      repos = repos.filter(repo => featuredSet.has(repo.name.toLowerCase()));
+    }
+
     if (countBadge) {
-      countBadge.textContent = `Indexing ${repos.length} Public Repositories`;
+      countBadge.textContent = `Indexing ${repos.length} Featured Repositories`;
     }
 
     container.innerHTML = repos.map((repo, idx) => {
@@ -249,7 +270,7 @@ async function initGitHubReposSync() {
       await fetchAndRender();
       syncBtn.textContent = 'Sync GitHub Repos 🔄';
       syncBtn.disabled = false;
-      showToast('✓ Successfully synced 11 public repositories from GitHub @ShotgunShinobi');
+      showToast('✓ Successfully synced featured repositories from GitHub @ShotgunShinobi');
     });
   }
 }
