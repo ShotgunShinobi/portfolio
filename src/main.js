@@ -110,8 +110,29 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initSpotlightEffect();
   initScrollSpy();
+  initMobileNav();
   initGitHubReposSync();
 });
+
+// Mobile Hamburger Navigation
+function initMobileNav() {
+  const toggleBtn = document.getElementById('hamburger-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (toggleBtn && navLinks) {
+    toggleBtn.addEventListener('click', () => {
+      toggleBtn.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleBtn.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+}
 
 // Toast notification trigger
 function showToast(message) {
@@ -223,10 +244,21 @@ async function initGitHubReposSync() {
     }
 
     if (countBadge) {
-      countBadge.textContent = `Indexing ${repos.length} Repositories`;
+      countBadge.textContent = `Indexing ${repos.length} Public Repositories`;
     }
 
-    container.innerHTML = repos.map((repo, idx) => {
+    const featuredExclude = new Set([
+      'exifremover',
+      'geomemoir',
+      'similarsiteextenstion',
+      'stockai',
+      'ethereum-hunter',
+      'ai-text-summarizer'
+    ]);
+
+    const dynamicRepos = repos.filter(repo => !featuredExclude.has(repo.name.toLowerCase()));
+
+    container.innerHTML = dynamicRepos.map((repo, idx) => {
       const categories = getRepoCategories(repo);
       const drawerId = getDrawerIdForRepo(repo.name);
       const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
