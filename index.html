@@ -79,13 +79,70 @@
           </div>
         </div>
 
-        <!-- Hero Right-Hand Visual Telemetry Card -->
-        <div class="glass-panel hud-card hero-visual-card fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-img-wrapper">
-            <img src="/hero_abstract_ai_1777611318696.png" alt="Neural Core AI" class="hero-img" />
-            <div class="hero-visual-badge">
-              <span class="text-cyan">SYSTEM STATUS: OPTIMAL</span>
-              <span class="text-gold">99.9% ACCURACY</span>
+        <!-- Hero Right-Hand Productive Sandbox Widget -->
+        <div class="glass-panel hud-card pipeline-sandbox-card fade-in-up" style="transition-delay: 0.2s;">
+          <!-- Sandbox Header -->
+          <div class="sandbox-header">
+            <div class="sandbox-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="sandbox-title">⚡ NEURAL PIPELINE ARCHITECT</div>
+            <div class="sandbox-status">
+              <span class="status-dot" id="pipeline-status-dot"></span>
+              <span id="pipeline-status-text">READY</span>
+            </div>
+          </div>
+
+          <!-- Presets Bar -->
+          <div class="sandbox-presets">
+            <span class="preset-label">PRESETS:</span>
+            <button class="preset-chip active" data-preset="rag">LLM Summarizer</button>
+            <button class="preset-chip" data-preset="stock">Stock Analytics</button>
+            <button class="preset-chip" data-preset="privacy">Privacy Sanitizer</button>
+          </div>
+
+          <!-- Interactive Node Selector -->
+          <div class="sandbox-modules">
+            <span class="module-chip active" data-node="ingest">📥 Ingest</span>
+            <span class="module-chip active" data-node="rag">⚡ RAG DB</span>
+            <span class="module-chip active" data-node="llm">🧠 LLM</span>
+            <span class="module-chip" data-node="vision">👁️ OpenCV</span>
+            <span class="module-chip active" data-node="api">🚀 FastAPI</span>
+          </div>
+
+          <!-- Visual Node Flow Diagram -->
+          <div class="pipeline-flow-container" id="pipeline-flow">
+            <!-- Dynamically populated node chain -->
+          </div>
+
+          <!-- Execution Controls & Realtime Telemetry -->
+          <div class="sandbox-controls">
+            <button class="btn btn-gold btn-execute" id="run-pipeline-btn">
+              <span>Execute Pipeline 🚀</span>
+            </button>
+            <div class="pipeline-metrics">
+              <div class="metric-mini">
+                <span class="metric-label">LATENCY</span>
+                <span class="metric-val text-cyan" id="metric-latency">-- ms</span>
+              </div>
+              <div class="metric-mini">
+                <span class="metric-label">ACCURACY</span>
+                <span class="metric-val text-gold" id="metric-accuracy">-- %</span>
+              </div>
+              <div class="metric-mini">
+                <span class="metric-label">THROUGHPUT</span>
+                <span class="metric-val text-purple" id="metric-tps">-- req/s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Streamed Terminal Execution Log -->
+          <div class="sandbox-console">
+            <div class="console-header">> SIMULATED PIPELINE TELEMETRY LOG</div>
+            <div class="console-output" id="pipeline-console-output">
+              <span class="log-line text-muted">[SYSTEM] Select modules or presets, then click Execute Pipeline.</span>
             </div>
           </div>
         </div>

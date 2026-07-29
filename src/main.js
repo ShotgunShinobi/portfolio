@@ -111,8 +111,168 @@ document.addEventListener('DOMContentLoaded', () => {
   initSpotlightEffect();
   initScrollSpy();
   initMobileNav();
+  initPipelineSandbox();
   initGitHubReposSync();
 });
+
+// AI Pipeline Sandbox Playground Engine
+function initPipelineSandbox() {
+  const flowContainer = document.getElementById('pipeline-flow');
+  const runBtn = document.getElementById('run-pipeline-btn');
+  const consoleOutput = document.getElementById('pipeline-console-output');
+  const statusDot = document.getElementById('pipeline-status-dot');
+  const statusText = document.getElementById('pipeline-status-text');
+
+  if (!flowContainer || !runBtn) return;
+
+  const nodeDefs = {
+    ingest: { label: '📥 Ingest', name: 'Data Ingestion', log: 'Ingesting enterprise data sources & unstructured PDFs...' },
+    rag: { label: '⚡ RAG DB', name: 'Vector DB Index', log: 'Querying Pinecone/Chroma vector embeddings store...' },
+    llm: { label: '🧠 LLM', name: 'Llama-2 Engine', log: 'Running Llama-2 fine-tuned quantized LLM inference...' },
+    vision: { label: '👁️ OpenCV', name: 'Computer Vision', log: 'Executing OpenCV spatial image & metadata feature extraction...' },
+    api: { label: '🚀 FastAPI', name: 'Async Gateway', log: 'Packaging JSON response via high-throughput FastAPI service...' }
+  };
+
+  const presets = {
+    rag: ['ingest', 'rag', 'llm', 'api'],
+    stock: ['ingest', 'llm', 'api'],
+    privacy: ['ingest', 'vision', 'api']
+  };
+
+  let activeNodes = ['ingest', 'rag', 'llm', 'api'];
+  let isExecuting = false;
+
+  function renderFlow() {
+    if (activeNodes.length === 0) {
+      flowContainer.innerHTML = '<span class="text-muted" style="font-family: var(--font-mono); font-size: 0.75rem; padding: 0.4rem;">Select modules to build pipeline...</span>';
+      return;
+    }
+
+    flowContainer.innerHTML = activeNodes.map((key, idx) => {
+      const def = nodeDefs[key];
+      const isLast = idx === activeNodes.length - 1;
+      return `
+        <div class="flow-node" data-flow-key="${key}">
+          <span>${def.label}</span>
+        </div>
+        ${!isLast ? '<span class="flow-arrow">➔</span>' : ''}
+      `;
+    }).join('');
+  }
+
+  function updateModuleChips() {
+    document.querySelectorAll('.module-chip').forEach(chip => {
+      const key = chip.getAttribute('data-node');
+      if (activeNodes.includes(key)) {
+        chip.classList.add('active');
+      } else {
+        chip.classList.remove('active');
+      }
+    });
+  }
+
+  document.querySelectorAll('.module-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (isExecuting) return;
+      const key = chip.getAttribute('data-node');
+      if (activeNodes.includes(key)) {
+        if (activeNodes.length > 1) {
+          activeNodes = activeNodes.filter(k => k !== key);
+        }
+      } else {
+        activeNodes.push(key);
+      }
+      document.querySelectorAll('.preset-chip').forEach(p => p.classList.remove('active'));
+      updateModuleChips();
+      renderFlow();
+    });
+  });
+
+  document.querySelectorAll('.preset-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (isExecuting) return;
+      const presetKey = chip.getAttribute('data-preset');
+      if (presets[presetKey]) {
+        activeNodes = [...presets[presetKey]];
+        document.querySelectorAll('.preset-chip').forEach(p => p.classList.remove('active'));
+        chip.classList.add('active');
+        updateModuleChips();
+        renderFlow();
+      }
+    });
+  });
+
+  runBtn.addEventListener('click', async () => {
+    if (isExecuting || activeNodes.length === 0) return;
+    isExecuting = true;
+    runBtn.disabled = true;
+    runBtn.querySelector('span').textContent = 'Executing... ⏳';
+
+    if (statusDot && statusText) {
+      statusDot.style.background = '#f59e0b';
+      statusDot.style.boxShadow = '0 0 10px #f59e0b';
+      statusText.textContent = 'EXECUTING';
+      statusText.className = 'text-gold';
+    }
+
+    consoleOutput.innerHTML = '';
+
+    function addLog(msg, colorClass = '') {
+      const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+      const line = document.createElement('div');
+      line.className = `log-line ${colorClass}`;
+      line.textContent = `[${time}] ${msg}`;
+      consoleOutput.appendChild(line);
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    }
+
+    addLog('Initializing Neural Pipeline Architect environment...', 'text-cyan');
+
+    const nodeElements = flowContainer.querySelectorAll('.flow-node');
+
+    for (let i = 0; i < activeNodes.length; i++) {
+      const key = activeNodes[i];
+      const def = nodeDefs[key];
+      const el = nodeElements[i];
+
+      if (el) el.classList.add('executing');
+      addLog(`▶ [STEP ${i + 1}/${activeNodes.length}] ${def.log}`);
+
+      await new Promise(res => setTimeout(res, 450));
+
+      if (el) el.classList.remove('executing');
+    }
+
+    const latency = Math.floor(Math.random() * 25 + 28);
+    const accuracy = (98.2 + Math.random() * 1.4).toFixed(1);
+    const tps = Math.floor(Math.random() * 400 + 1050);
+
+    const latEl = document.getElementById('metric-latency');
+    const accEl = document.getElementById('metric-accuracy');
+    const tpsEl = document.getElementById('metric-tps');
+
+    if (latEl) latEl.textContent = `${latency} ms`;
+    if (accEl) accEl.textContent = `${accuracy}%`;
+    if (tpsEl) tpsEl.textContent = `${tps} req/s`;
+
+    addLog(`✓ PIPELINE EXECUTION SUCCESSFUL. Latency: ${latency}ms | Accuracy: ${accuracy}%`, 'text-gold');
+
+    if (statusDot && statusText) {
+      statusDot.style.background = '#22c55e';
+      statusDot.style.boxShadow = '0 0 10px #22c55e';
+      statusText.textContent = 'OPTIMAL';
+      statusText.className = 'text-cyan';
+    }
+
+    runBtn.disabled = false;
+    runBtn.querySelector('span').textContent = 'Execute Pipeline 🚀';
+    isExecuting = false;
+
+    showToast(`⚡ Pipeline Executed! ${activeNodes.length} modules processed in ${latency}ms.`);
+  });
+
+  renderFlow();
+}
 
 // Mobile Hamburger Navigation
 function initMobileNav() {
