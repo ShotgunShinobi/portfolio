@@ -56,18 +56,18 @@ export function initCanvasBackground() {
     offscreenGridCanvas.width = width;
     offscreenGridCanvas.height = height;
 
-    // Fill parchment gradient ONCE into offscreen buffer
+    // Fill dark obsidian gradient ONCE into offscreen buffer
     const bgGrad = offscreenGridCtx.createLinearGradient(0, 0, width, height);
-    bgGrad.addColorStop(0, '#FAF7F2');
-    bgGrad.addColorStop(0.5, '#F5F0E8');
-    bgGrad.addColorStop(1, '#F0EBE1');
+    bgGrad.addColorStop(0, '#060913');
+    bgGrad.addColorStop(0.5, '#0A0F1D');
+    bgGrad.addColorStop(1, '#0F172A');
     offscreenGridCtx.fillStyle = bgGrad;
     offscreenGridCtx.fillRect(0, 0, width, height);
 
     const gridSize = 75;
 
     // Batch all grid line paths into a single GPU draw call
-    offscreenGridCtx.strokeStyle = 'rgba(148, 163, 184, 0.40)';
+    offscreenGridCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
     offscreenGridCtx.lineWidth = 0.6;
     offscreenGridCtx.beginPath();
     for (let x = 0; x < width; x += gridSize) {
@@ -81,7 +81,7 @@ export function initCanvasBackground() {
     offscreenGridCtx.stroke();
 
     // Batch all '+' tick marks into a single GPU draw call
-    offscreenGridCtx.strokeStyle = 'rgba(15, 23, 42, 0.35)';
+    offscreenGridCtx.strokeStyle = 'rgba(245, 158, 11, 0.25)';
     offscreenGridCtx.lineWidth = 1.0;
     offscreenGridCtx.beginPath();
     for (let x = 0; x < width; x += gridSize) {
@@ -114,7 +114,7 @@ export function initCanvasBackground() {
     draw(time) {
       ctx.beginPath();
       ctx.lineWidth = this.width;
-      ctx.strokeStyle = this.isAccent ? this.accentColor : 'rgba(71, 85, 105, 0.22)';
+      ctx.strokeStyle = this.isAccent ? this.accentColor : 'rgba(148, 163, 184, 0.12)';
 
       const points = 24; // Optimized control point count
       const step = width / points;
@@ -162,7 +162,7 @@ export function initCanvasBackground() {
 
       ctx.beginPath();
       ctx.arc(particleX, particleY, this.isAccent ? 2.5 : 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = this.isAccent ? this.accentColor : 'rgba(15, 23, 42, 0.35)';
+      ctx.fillStyle = this.isAccent ? this.accentColor : 'rgba(248, 250, 252, 0.35)';
       ctx.fill();
     }
   }
@@ -172,9 +172,9 @@ export function initCanvasBackground() {
     const spacing = height / (streamlineCount + 1);
 
     const accentColors = [
-      'rgba(220, 38, 38, 0.80)',   // Vibrant Crimson Red
-      'rgba(180, 83, 9, 0.80)',    // Warm Golden Amber
-      'rgba(217, 119, 6, 0.75)'    // Champagne Gold Accent
+      'rgba(245, 158, 11, 0.85)',   // Vibrant Golden Amber
+      'rgba(56, 189, 248, 0.85)',   // Cyber Electric Cyan
+      'rgba(249, 115, 22, 0.80)'    // Deep Sunset Orange
     ];
 
     for (let i = 1; i <= streamlineCount; i++) {
@@ -215,11 +215,11 @@ export function initCanvasBackground() {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = this.isMajor ? 'rgba(180, 83, 9, 0.6)' : 'rgba(15, 23, 42, 0.3)';
+      ctx.fillStyle = this.isMajor ? 'rgba(245, 158, 11, 0.7)' : 'rgba(248, 250, 252, 0.35)';
       ctx.fill();
 
       if (this.isMajor) {
-        ctx.strokeStyle = 'rgba(180, 83, 9, 0.3)';
+        ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
         ctx.lineWidth = 0.6;
         ctx.beginPath();
         ctx.moveTo(this.x - 5, this.y);
@@ -229,7 +229,7 @@ export function initCanvasBackground() {
         ctx.stroke();
 
         ctx.font = "8px 'JetBrains Mono', monospace";
-        ctx.fillStyle = 'rgba(71, 85, 105, 0.5)';
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
         ctx.fillText(this.label, this.x + 7, this.y + 3);
       }
     }
@@ -258,14 +258,14 @@ export function initCanvasBackground() {
     const y = mouse.y;
 
     // Tracking ring
-    ctx.strokeStyle = 'rgba(180, 83, 9, 0.35)';
+    ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.arc(x, y, 22, 0, Math.PI * 2);
     ctx.stroke();
 
     // Center crosshair
-    ctx.strokeStyle = 'rgba(220, 38, 38, 0.5)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
     ctx.lineWidth = 0.8;
     ctx.beginPath();
     ctx.moveTo(x - 30, y);
@@ -279,13 +279,13 @@ export function initCanvasBackground() {
     ctx.font = "9px 'JetBrains Mono', monospace";
     const textWidth = ctx.measureText(text).width;
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    ctx.strokeStyle = 'rgba(203, 213, 225, 0.8)';
+    ctx.fillStyle = 'rgba(10, 15, 29, 0.9)';
+    ctx.strokeStyle = 'rgba(51, 65, 85, 0.8)';
     ctx.lineWidth = 1;
     ctx.fillRect(x + 12, y - 24, textWidth + 10, 16);
     ctx.strokeRect(x + 12, y - 24, textWidth + 10, 16);
 
-    ctx.fillStyle = '#0F172A';
+    ctx.fillStyle = '#F8FAFC';
     ctx.fillText(text, x + 17, y - 13);
 
     ctx.restore();
@@ -319,8 +319,8 @@ export function initCanvasBackground() {
           ctx.beginPath();
           ctx.moveTo(draftingNodes[i].x, draftingNodes[i].y);
           ctx.lineTo(draftingNodes[j].x, draftingNodes[j].y);
-          const alpha = (1 - dist / 110) * 0.12;
-          ctx.strokeStyle = `rgba(15, 23, 42, ${alpha})`;
+          const alpha = (1 - dist / 110) * 0.15;
+          ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }

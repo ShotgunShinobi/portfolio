@@ -203,7 +203,6 @@ export function openDrawer(projectId) {
 
   body.innerHTML = `
     <div class="drawer-header">
-      <span class="status-badge"><span class="status-dot"></span> TELEMETRY DOSSIER</span>
       <h2 class="drawer-title">${data.title}</h2>
       <p class="drawer-subtitle">${data.subtitle}</p>
       <div class="project-tags" style="margin-top: 1rem;">

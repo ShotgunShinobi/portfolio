@@ -2,6 +2,7 @@ import './style.css';
 import { inject } from '@vercel/analytics';
 import { initCanvasBackground } from './canvas-bg.js';
 import { openDrawer, projectsData } from './drawer.js';
+import { initSandTextParticles } from './sand-text-particles.js';
 
 // Initialize Vercel Analytics
 inject();
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   localStorage.removeItem('theme');
   document.documentElement.removeAttribute('data-theme');
   initCanvasBackground();
+  initSandTextParticles();
   initAnimations();
   initSpotlightEffect();
   initScrollSpy();
@@ -122,8 +124,6 @@ function initPipelineSandbox() {
   const flowContainer = document.getElementById('pipeline-flow');
   const runBtn = document.getElementById('run-pipeline-btn');
   const consoleOutput = document.getElementById('pipeline-console-output');
-  const statusDot = document.getElementById('pipeline-status-dot');
-  const statusText = document.getElementById('pipeline-status-text');
 
   if (!flowContainer || !runBtn) return;
 
@@ -210,12 +210,7 @@ function initPipelineSandbox() {
     runBtn.disabled = true;
     runBtn.querySelector('span').textContent = 'Executing... ⏳';
 
-    if (statusDot && statusText) {
-      statusDot.style.background = '#f59e0b';
-      statusDot.style.boxShadow = '0 0 10px #f59e0b';
-      statusText.textContent = 'EXECUTING';
-      statusText.className = 'text-gold';
-    }
+
 
     consoleOutput.innerHTML = '';
 
@@ -259,12 +254,7 @@ function initPipelineSandbox() {
 
     addLog(`✓ PIPELINE EXECUTION SUCCESSFUL. Latency: ${latency}ms | Accuracy: ${accuracy}%`, 'text-gold');
 
-    if (statusDot && statusText) {
-      statusDot.style.background = '#22c55e';
-      statusDot.style.boxShadow = '0 0 10px #22c55e';
-      statusText.textContent = 'OPTIMAL';
-      statusText.className = 'text-cyan';
-    }
+
 
     runBtn.disabled = false;
     runBtn.querySelector('span').textContent = 'Execute Pipeline 🚀';
@@ -567,8 +557,20 @@ function initSpotlightEffect() {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+
       card.style.setProperty('--mouse-x', `${x}px`);
       card.style.setProperty('--mouse-y', `${y}px`);
+      card.style.setProperty('--rotate-x', `${rotateX.toFixed(2)}deg`);
+      card.style.setProperty('--rotate-y', `${rotateY.toFixed(2)}deg`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--rotate-x', '0deg');
+      card.style.setProperty('--rotate-y', '0deg');
     });
   });
 }
