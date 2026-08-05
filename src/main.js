@@ -106,6 +106,8 @@ const FEATURED_REPOS = null;
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  localStorage.removeItem('theme');
+  document.documentElement.removeAttribute('data-theme');
   initCanvasBackground();
   initAnimations();
   initSpotlightEffect();
@@ -433,10 +435,10 @@ async function initGitHubReposSync() {
              style="transition-delay: ${(idx % 6) * 0.05}s;">
           <div class="project-content" style="padding-top: 1.8rem;">
             <div class="project-tags">
-              <span class="tag" style="background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.4);">
+              <span class="tag">
                 <span class="gh-lang-dot"></span> ${language}
               </span>
-              ${stars > 0 ? `<span class="tag" style="color: var(--imperial-gold); border-color: rgba(245, 158, 11, 0.4);">★ ${stars}</span>` : ''}
+              ${stars > 0 ? `<span class="tag" style="color: var(--imperial-gold);">★ ${stars}</span>` : ''}
               <span class="tag">Live GitHub Repo</span>
             </div>
 
