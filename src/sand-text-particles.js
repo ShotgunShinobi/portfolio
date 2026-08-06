@@ -21,7 +21,7 @@ export function initSandTextParticles() {
     const isMobile = window.innerWidth <= 600;
     const isTablet = window.innerWidth <= 900;
     height = canvas.height = isMobile ? 180 : isTablet ? 230 : 275;
-    
+
     particles = createSandParticles();
   }
 
@@ -157,7 +157,7 @@ export function initSandTextParticles() {
         const dist = Math.sqrt(distSq);
         const force = (mouse.radius - dist) / mouse.radius;
         const angle = Math.atan2(dy, dx);
-        
+
         p.vx += Math.cos(angle) * force * 5.5;
         p.vy += Math.sin(angle) * force * 5.5;
       }
@@ -165,7 +165,7 @@ export function initSandTextParticles() {
       // Spring force returning sand grains to origin text position
       const dxOrigin = p.originX - p.x;
       const dyOrigin = p.originY - p.y;
-      
+
       p.vx += dxOrigin * p.ease;
       p.vy += dyOrigin * p.ease;
 
