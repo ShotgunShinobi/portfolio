@@ -1,73 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-  /* Executive AI Systems Engineer Dark Obsidian & Luminous System */
-  --bg-primary: #0A0F1D;
-  /* Deep Obsidian Slate */
-  --bg-secondary: #111827;
-  /* Dark Midnight Slate */
-  --bg-card: rgba(17, 24, 39, 0.75);
+  /* Strict Pure Monochrome Black & White Wireframe Design System */
+  --bg-primary: #000000;
+  --bg-secondary: #080808;
+  --bg-card: rgba(12, 12, 12, 0.94);
 
-  --text-primary: #F8FAFC;
-  /* Crisp White Slate */
-  --text-secondary: #94A3B8;
-  /* Refined Cool Slate */
-  --text-muted: #64748B;
-  /* Muted Slate Gray */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
 
-  --sun-amber: #F59E0B;
-  /* Vibrant Amber Gold */
-  --sunset-orange: #F97316;
-  /* Electric Warm Amber */
-  --imperial-gold: #F59E0B;
-  /* Gold Amber Accent */
-  --summer-gold: #FBBF24;
-  /* Bright Champagne Gold */
-  --coral-blush: #EA580C;
-  /* Warm Crimson Accent */
+  --sun-amber: #FFFFFF;
+  --sunset-orange: #FFFFFF;
+  --imperial-gold: #FFFFFF;
+  --summer-gold: #FFFFFF;
+  --coral-blush: #FFFFFF;
 
-  --royal-purple: #A855F7;
-  --royal-indigo: #38BDF8;
-  --cyber-cyan: #38BDF8;
-  --neon-pink: #EC4899;
+  --royal-purple: #FFFFFF;
+  --royal-indigo: #FFFFFF;
+  --cyber-cyan: #FFFFFF;
+  --neon-pink: #FFFFFF;
 
-  --accent-gradient: linear-gradient(135deg, #F8FAFC 0%, #F59E0B 50%, #F97316 100%);
-  --royal-gradient: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-  --gold-gradient: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+  --accent-gradient: linear-gradient(135deg, #FFFFFF 0%, #E4E4E7 100%);
+  --royal-gradient: linear-gradient(135deg, #18181B 0%, #09090B 100%);
+  --gold-gradient: linear-gradient(135deg, #FFFFFF 0%, #E4E4E7 100%);
 
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-glow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  --gold-glow: 0 0 25px rgba(245, 158, 11, 0.25);
-  --cyan-glow: 0 0 25px rgba(56, 189, 248, 0.2);
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-glow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  --gold-glow: 0 0 20px rgba(255, 255, 255, 0.15);
+  --cyan-glow: 0 0 20px rgba(255, 255, 255, 0.15);
 
-  --card-bg: rgba(15, 23, 42, 0.75);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --card-bg: rgba(10, 10, 10, 0.9);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 
-  --header-bg: rgba(10, 15, 29, 0.82);
-  --header-border: rgba(255, 255, 255, 0.12);
-  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --header-bg: rgba(5, 5, 5, 0.9);
+  --header-border: rgba(255, 255, 255, 0.25);
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 
-  --tag-bg: rgba(30, 41, 59, 0.7);
-  --tag-text: #E2E8F0;
-  --tag-border: rgba(51, 65, 85, 0.7);
+  --tag-bg: rgba(24, 24, 27, 0.8);
+  --tag-text: #FFFFFF;
+  --tag-border: rgba(255, 255, 255, 0.2);
 
-  --btn-sec-bg: rgba(30, 41, 59, 0.7);
-  --btn-sec-hover: rgba(51, 65, 85, 0.9);
+  --btn-sec-bg: rgba(18, 18, 18, 0.9);
+  --btn-sec-hover: rgba(39, 39, 42, 0.9);
 
-  --sandbox-card-bg: rgba(15, 23, 42, 0.85);
-  --sandbox-chip-bg: rgba(30, 41, 59, 0.7);
+  --sandbox-card-bg: rgba(10, 10, 10, 0.92);
+  --sandbox-chip-bg: rgba(24, 24, 27, 0.8);
 
-  --drawer-bg: #0B0F19;
-  --drawer-border: rgba(51, 65, 85, 0.7);
-  --drawer-card-bg: rgba(17, 24, 39, 0.9);
+  --drawer-bg: #050505;
+  --drawer-border: rgba(255, 255, 255, 0.2);
+  --drawer-card-bg: rgba(15, 15, 15, 0.9);
 
-  --footer-bg: #070A12;
-  --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-bg: #030303;
+  --footer-border: rgba(255, 255, 255, 0.15);
 
-  --glow-1: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(10, 15, 29, 0) 70%);
-  --glow-2: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(10, 15, 29, 0) 70%);
+  --glow-1: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+  --glow-2: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
 
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-display: 'Bricolage Grotesque', 'Outfit', sans-serif;
@@ -217,24 +207,24 @@ img {
   letter-spacing: 1px;
 }
 
-/* Glass Panels & Holographic Bento Slate Material Texture */
+/* Glass Panels & Minimalist Wireframe Slate Material */
 .glass-panel,
 .glass-hud,
 .hud-card,
 .project-card {
-  background-color: #0B101D !important;
+  background-color: rgba(10, 10, 10, 0.94) !important;
   background-image:
-    radial-gradient(rgba(245, 158, 11, 0.28) 1.25px, transparent 1.25px),
-    linear-gradient(145deg, rgba(17, 24, 39, 0.92) 0%, rgba(10, 15, 29, 0.97) 100%) !important;
-  background-size: 16px 16px, 100% 100% !important;
+    radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(14, 14, 14, 0.96) 0%, rgba(6, 6, 6, 0.98) 100%) !important;
+  background-size: 20px 20px, 100% 100% !important;
   background-position: 0 0, 0 0 !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 6px !important;
   box-shadow:
     inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
-    0 10px 30px rgba(0, 0, 0, 0.5);
+    0 10px 30px rgba(0, 0, 0, 0.8);
   position: relative;
   overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
@@ -242,62 +232,61 @@ img {
   will-change: transform;
 }
 
-/* 3D Dynamic Tilt Perspective & Holographic Hover */
-.hud-card:hover,
-.project-card:hover {
-  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) translateZ(8px);
-  border-color: rgba(245, 158, 11, 0.4);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
-    0 18px 45px rgba(0, 0, 0, 0.6),
-    0 0 25px rgba(245, 158, 11, 0.22);
-}
-
-/* Dynamic Holographic Border & Beam Light */
+/* Monochrome Technical Corner Brackets */
 .hud-card::before,
 .project-card::before {
   content: '';
   position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  border-radius: 19px;
-  background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(245, 158, 11, 0.28) 0%,
-      rgba(56, 189, 248, 0.20) 40%,
-      rgba(168, 85, 247, 0.15) 70%,
-      transparent 100%);
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
+  z-index: 2;
+  transition: var(--transition-smooth);
 }
 
-.hud-card:hover::before,
-.project-card:hover::before {
-  opacity: 1;
-}
-
-/* Bento Corner Brackets */
-.hud-card::after {
+.hud-card::after,
+.project-card::after {
   content: '';
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 14px;
-  height: 14px;
-  border-right: 2px solid var(--sun-amber);
-  border-bottom: 2px solid var(--sun-amber);
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #FFFFFF;
+  border-right: 2px solid #FFFFFF;
   pointer-events: none;
-  opacity: 0.3;
+  z-index: 2;
   transition: var(--transition-smooth);
 }
 
-.hud-card:hover::after {
-  opacity: 1;
-  border-color: var(--summer-gold);
-  box-shadow: 0 0 8px var(--sun-amber);
+.hud-card:hover,
+.project-card:hover {
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) translateZ(8px);
+  border-color: #FFFFFF !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 18px 45px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.hud-card:hover::before,
+.project-card:hover::before {
+  width: 16px;
+  height: 16px;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 8px #FFFFFF;
+}
+
+.hud-card:hover::after,
+.project-card:hover::after {
+  width: 16px;
+  height: 16px;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 8px #FFFFFF;
 }
 
 
@@ -1042,17 +1031,17 @@ img {
 
 .drawer-metric-card {
   background: var(--drawer-card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
   padding: 1.2rem;
   text-align: center;
 }
 
 .metric-value {
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--imperial-gold);
+  color: #FFFFFF;
 }
 
 .metric-label {
