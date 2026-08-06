@@ -314,8 +314,8 @@ img {
   padding: 0.7rem 1.6rem;
   transition: var(--transition-smooth);
   background: var(--header-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--header-border);
   border-radius: 40px;
   box-shadow: var(--header-shadow);
