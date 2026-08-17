@@ -56,18 +56,14 @@ export function initCanvasBackground() {
     offscreenGridCanvas.width = width;
     offscreenGridCanvas.height = height;
 
-    // Fill dark obsidian gradient ONCE into offscreen buffer
-    const bgGrad = offscreenGridCtx.createLinearGradient(0, 0, width, height);
-    bgGrad.addColorStop(0, '#060913');
-    bgGrad.addColorStop(0.5, '#0A0F1D');
-    bgGrad.addColorStop(1, '#0F172A');
-    offscreenGridCtx.fillStyle = bgGrad;
+    // Fill pure void black background ONCE into offscreen buffer
+    offscreenGridCtx.fillStyle = '#000000';
     offscreenGridCtx.fillRect(0, 0, width, height);
 
-    const gridSize = 75;
+    const gridSize = 70;
 
     // Batch all grid line paths into a single GPU draw call
-    offscreenGridCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+    offscreenGridCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
     offscreenGridCtx.lineWidth = 0.6;
     offscreenGridCtx.beginPath();
     for (let x = 0; x < width; x += gridSize) {
@@ -81,15 +77,15 @@ export function initCanvasBackground() {
     offscreenGridCtx.stroke();
 
     // Batch all '+' tick marks into a single GPU draw call
-    offscreenGridCtx.strokeStyle = 'rgba(245, 158, 11, 0.25)';
+    offscreenGridCtx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
     offscreenGridCtx.lineWidth = 1.0;
     offscreenGridCtx.beginPath();
     for (let x = 0; x < width; x += gridSize) {
       for (let y = 0; y < height; y += gridSize) {
-        offscreenGridCtx.moveTo(x - 5, y);
-        offscreenGridCtx.lineTo(x + 5, y);
-        offscreenGridCtx.moveTo(x, y - 5);
-        offscreenGridCtx.lineTo(x, y + 5);
+        offscreenGridCtx.moveTo(x - 4, y);
+        offscreenGridCtx.lineTo(x + 4, y);
+        offscreenGridCtx.moveTo(x, y - 4);
+        offscreenGridCtx.lineTo(x, y + 4);
       }
     }
     offscreenGridCtx.stroke();
@@ -108,23 +104,22 @@ export function initCanvasBackground() {
       this.phase = Math.random() * Math.PI * 2;
       this.frequency = Math.random() * 0.005 + 0.003;
       this.amplitude = Math.random() * 9 + 4;
-      this.width = isAccent ? 1.8 : 0.9;
+      this.width = isAccent ? 1.6 : 0.8;
     }
 
     draw(time) {
       ctx.beginPath();
       ctx.lineWidth = this.width;
-      ctx.strokeStyle = this.isAccent ? this.accentColor : 'rgba(148, 163, 184, 0.12)';
+      ctx.strokeStyle = this.isAccent ? this.accentColor : 'rgba(255, 255, 255, 0.1)';
 
-      const points = 24; // Optimized control point count
+      const points = 24;
       const step = width / points;
-      const radiusSq = 32400; // 180 * 180
+      const radiusSq = 32400;
 
       for (let i = 0; i <= points; i++) {
         const x = i * step;
         let y = this.yBase + Math.sin(x * this.frequency + time * this.speed + this.phase) * this.amplitude;
 
-        // Aerodynamic deflection around cursor (wind-tunnel effect)
         const dx = x - mouse.x;
         const dy = y - mouse.y;
         const distSq = dx * dx + dy * dy;
@@ -145,7 +140,6 @@ export function initCanvasBackground() {
 
       ctx.stroke();
 
-      // Flow particle traveling along the streamline
       const particleX = ((time * 60 * this.speed + this.phase * 100) % (width + 200)) - 100;
       let particleY = this.yBase + Math.sin(particleX * this.frequency + time * this.speed + this.phase) * this.amplitude;
 
@@ -161,8 +155,8 @@ export function initCanvasBackground() {
       }
 
       ctx.beginPath();
-      ctx.arc(particleX, particleY, this.isAccent ? 2.5 : 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = this.isAccent ? this.accentColor : 'rgba(248, 250, 252, 0.35)';
+      ctx.arc(particleX, particleY, this.isAccent ? 2 : 1.2, 0, Math.PI * 2);
+      ctx.fillStyle = this.isAccent ? this.accentColor : 'rgba(255, 255, 255, 0.3)';
       ctx.fill();
     }
   }
@@ -172,9 +166,9 @@ export function initCanvasBackground() {
     const spacing = height / (streamlineCount + 1);
 
     const accentColors = [
-      'rgba(245, 158, 11, 0.85)',   // Vibrant Golden Amber
-      'rgba(56, 189, 248, 0.85)',   // Cyber Electric Cyan
-      'rgba(249, 115, 22, 0.80)'    // Deep Sunset Orange
+      'rgba(255, 255, 255, 0.75)',
+      'rgba(255, 255, 255, 0.55)',
+      'rgba(255, 255, 255, 0.40)'
     ];
 
     for (let i = 1; i <= streamlineCount; i++) {
@@ -215,11 +209,11 @@ export function initCanvasBackground() {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = this.isMajor ? 'rgba(245, 158, 11, 0.7)' : 'rgba(248, 250, 252, 0.35)';
+      ctx.fillStyle = this.isMajor ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.3)';
       ctx.fill();
 
       if (this.isMajor) {
-        ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.lineWidth = 0.6;
         ctx.beginPath();
         ctx.moveTo(this.x - 5, this.y);
@@ -229,7 +223,7 @@ export function initCanvasBackground() {
         ctx.stroke();
 
         ctx.font = "8px 'JetBrains Mono', monospace";
-        ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
         ctx.fillText(this.label, this.x + 7, this.y + 3);
       }
     }
@@ -257,36 +251,48 @@ export function initCanvasBackground() {
     const x = mouse.x;
     const y = mouse.y;
 
+    // Full-screen monochrome guide rays
+    ctx.setLineDash([4, 6]);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
     // Tracking ring
-    ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.arc(x, y, 22, 0, Math.PI * 2);
+    ctx.arc(x, y, 20, 0, Math.PI * 2);
     ctx.stroke();
 
     // Center crosshair
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
-    ctx.lineWidth = 0.8;
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(x - 30, y);
-    ctx.lineTo(x + 30, y);
-    ctx.moveTo(x, y - 30);
-    ctx.lineTo(x, y + 30);
+    ctx.moveTo(x - 14, y);
+    ctx.lineTo(x + 14, y);
+    ctx.moveTo(x, y - 14);
+    ctx.lineTo(x, y + 14);
     ctx.stroke();
 
     // Telemetry readout box
-    const text = `AERO_VEC // X:${Math.round(x)} Y:${Math.round(y)}`;
+    const text = `CAD_POS // X:${Math.round(x)} Y:${Math.round(y)}`;
     ctx.font = "9px 'JetBrains Mono', monospace";
     const textWidth = ctx.measureText(text).width;
 
-    ctx.fillStyle = 'rgba(10, 15, 29, 0.9)';
-    ctx.strokeStyle = 'rgba(51, 65, 85, 0.8)';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.95)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
     ctx.lineWidth = 1;
-    ctx.fillRect(x + 12, y - 24, textWidth + 10, 16);
-    ctx.strokeRect(x + 12, y - 24, textWidth + 10, 16);
+    ctx.fillRect(x + 16, y - 28, textWidth + 12, 18);
+    ctx.strokeRect(x + 16, y - 28, textWidth + 12, 18);
 
-    ctx.fillStyle = '#F8FAFC';
-    ctx.fillText(text, x + 17, y - 13);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(text, x + 22, y - 16);
 
     ctx.restore();
   }
@@ -295,7 +301,6 @@ export function initCanvasBackground() {
   let time = 0;
 
   function animate() {
-    // Single fast GPU texture blit for static background + grid
     ctx.drawImage(offscreenGridCanvas, 0, 0);
 
     time += 0.012;
@@ -303,7 +308,6 @@ export function initCanvasBackground() {
       streamlines[i].draw(time);
     }
 
-    // Fast node distance check using distSq (avoids Math.sqrt)
     const maxDistSq = 110 * 110;
     for (let i = 0; i < draftingNodes.length; i++) {
       draftingNodes[i].update();
@@ -320,7 +324,7 @@ export function initCanvasBackground() {
           ctx.moveTo(draftingNodes[i].x, draftingNodes[i].y);
           ctx.lineTo(draftingNodes[j].x, draftingNodes[j].y);
           const alpha = (1 - dist / 110) * 0.15;
-          ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
