@@ -237,7 +237,7 @@ export function openDrawer(projectId) {
     </div>
 
     <div class="drawer-actions">
-      <a href="${data.github}" target="_blank" class="btn btn-gold" style="width: 100%;">View Source Code on GitHub &rarr;</a>
+      <a href="${data.github}" target="_blank" rel="noopener noreferrer" class="btn btn-gold" style="width: 100%;">View Source Code on GitHub &rarr;</a>
     </div>
   `;
 

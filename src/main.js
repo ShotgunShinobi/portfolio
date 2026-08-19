@@ -368,6 +368,16 @@ function applyActiveFilter() {
   });
 }
 
+function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // Fetch & Render GitHub Repositories
 async function initGitHubReposSync() {
   const container = document.getElementById('live-github-container');
@@ -390,7 +400,7 @@ async function initGitHubReposSync() {
       console.log('GitHub API fetch using cached fallback');
     }
 
-    if (FEATURED_REPOS && FEATURED_REPOS.length > 0) {
+    if (typeof FEATURED_REPOS !== 'undefined' && FEATURED_REPOS && FEATURED_REPOS.length > 0) {
       const featuredSet = new Set(FEATURED_REPOS.map(name => name.toLowerCase()));
       repos = repos.filter(repo => featuredSet.has(repo.name.toLowerCase()));
     }
@@ -408,19 +418,22 @@ async function initGitHubReposSync() {
       'ai-text-summarizer'
     ]);
 
-    const dynamicRepos = repos.filter(repo => !featuredExclude.has(repo.name.toLowerCase()));
+    const dynamicRepos = repos.filter(repo => !featuredExclude.has((repo.name || '').toLowerCase()));
 
     container.innerHTML = dynamicRepos.map((repo, idx) => {
-      const categories = getRepoCategories(repo);
-      const drawerId = getDrawerIdForRepo(repo.name);
-      const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      const language = repo.language || 'Code';
-      const stars = repo.stargazers_count || 0;
+      const categories = escapeHTML(getRepoCategories(repo));
+      const drawerId = getDrawerIdForRepo(repo.name || '');
+      const rawUrl = repo.html_url && repo.html_url.startsWith('https://github.com/') ? repo.html_url : 'https://github.com/ShotgunShinobi';
+      const safeUrl = escapeHTML(rawUrl);
+      const safeName = escapeHTML(repo.name || 'Repository');
+      const safeDesc = escapeHTML(repo.description || 'Public GitHub repository by @ShotgunShinobi.');
+      const language = escapeHTML(repo.language || 'Code');
+      const stars = Number.isInteger(repo.stargazers_count) && repo.stargazers_count > 0 ? repo.stargazers_count : 0;
 
       return `
         <div class="project-card glass-panel hud-card gh-repo-card fade-in-up visible" 
-             data-id="${drawerId || ''}" 
-             data-url="${repo.html_url}"
+             data-id="${drawerId ? escapeHTML(drawerId) : ''}" 
+             data-url="${safeUrl}"
              data-category="${categories}" 
              style="transition-delay: ${(idx % 6) * 0.05}s;">
           <div class="project-content" style="padding-top: 1.8rem;">
@@ -432,8 +445,8 @@ async function initGitHubReposSync() {
               <span class="tag">Live GitHub Repo</span>
             </div>
 
-            <h3 class="project-title" style="font-size: 1.45rem;">${repo.name}</h3>
-            <p class="project-desc">${repo.description || 'Public GitHub repository by @ShotgunShinobi.'}</p>
+            <h3 class="project-title" style="font-size: 1.45rem;">${safeName}</h3>
+            <p class="project-desc">${safeDesc}</p>
 
             <div class="project-action-bar" style="margin-top: 1.2rem;">
               <span>${drawerId ? 'View Telemetry Dossier &rarr;' : 'View Source on GitHub &rarr;'}</span>
